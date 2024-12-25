@@ -22,7 +22,6 @@ then
     1@ = Char.StoreCarIsIn($PLAYER_ACTOR)
     Car.Fix(1@)
     Car.SetHeavy(1@, True)
-    Car.GiveNonPlayerNitro(1@)
     Car.SetCanBeVisiblyDamaged(1@, False)
     Car.SetPetrolTankWeakpoint(1@, False)
     Car.SetHealth(1@, 10000)
