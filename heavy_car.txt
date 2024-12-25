@@ -47,9 +47,10 @@ then
     int health, traction
     health, traction = get_car_data()
     set_car_to_heavy()
-    Text.PrintHelp("Heavy Car Activated", 1000)
+    Text.PrintHelp("Heavy Car Activated")
 else
     restore_car_stats(health, traction)
+    Text.PrintHelp("Heavy Car Deactivated")
     goto @main
 end
 
