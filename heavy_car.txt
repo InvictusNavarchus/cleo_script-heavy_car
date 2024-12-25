@@ -59,13 +59,16 @@ then
     health, traction = get_car_data(car_handle)
     set_car_to_heavy(car_handle)
     Text.PrintHelpString("Heavy Car Activated")
+else
+    goto @main
 end
 
-// Check if player is exiting a car;
-if Char.IsExitingAnyCar($PLAYER_ACTOR)
-then
-    restore_car_stats(car_handle, health, traction)
-    Text.PrintHelpString("Heavy Car Deactivated")
+// Wait until exits a car
+while not Char.IsExitingAnyCar($PLAYER_ACTOR)
+    wait 500
 end
+
+restore_car_stats(car_handle, health, traction)
+Text.PrintHelpString("Heavy Car Deactivated")
 
 goto @main
