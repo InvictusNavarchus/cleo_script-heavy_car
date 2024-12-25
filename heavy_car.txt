@@ -10,7 +10,7 @@ script_name 'HEAVYCAR'
 
 function get_car_data(): int, int
     int health = Car.GetHealth(1@)
-    int traction = 1.0
+    float traction = 1.0
     return health traction
 end
 
@@ -44,7 +44,8 @@ end
 if Char.IsInAnyCar($PLAYER_ACTOR)    
 then
     1@ = Char.StoreCarIsIn($PLAYER_ACTOR)
-    int health, traction
+    int health
+    float traction
     health, traction = get_car_data()
     set_car_to_heavy()
     Text.PrintHelp("Heavy Car Activated")
