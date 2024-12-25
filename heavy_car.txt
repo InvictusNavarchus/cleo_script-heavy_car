@@ -19,13 +19,7 @@ end
 1@ = Char.StoreCarIsInNoSave($PLAYER_ACTOR)
 
 // Check if the player is in a car; return to main loop if not
-if not Char.IsInAnyCar($PLAYER_ACTOR)
-then
-    goto @main
-end
-
-// Wait for H key press to apply modifications
-if Pad.IsKeyPressed(KeyCode.H)
+if Char.IsInAnyCar($PLAYER_ACTOR)
 then
     Car.Fix(1@)
     Car.SetHeavy(1@, True)
@@ -35,6 +29,8 @@ then
     Car.SetHealth(1@, 10000)
     Car.SetTraction(1@, 2.0)
     Text.PrintHelp("Heavy Car Activated", 1000)
+else
+    goto @main
 end
 
 goto @main
