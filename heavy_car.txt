@@ -7,6 +7,31 @@ script_name 'HEAVYCAR'
 // Originally created by The AnonMod ANG
 // Link: https://www.gtainside.com/en/sanandreas/mods/43308-heavy-car-v3/
 
+// states
+int health, traction
+
+function get_car_data()
+    health = Car.GetHealth(1@)
+    traction = 1.0
+end
+
+function restore_car_stats()
+    Car.SetHeavy(1@, False)
+    Car.SetCanBeVisiblyDamaged(1@, True)
+    Car.SetPetrolTankWeakpoint(1@, True)
+    Car.SetHealth(1@, health)
+    Car.SetTraction(1@, traction)
+end
+
+function set_car_to_heavy()
+    Car.Fix(1@)
+    Car.SetHeavy(1@, True)
+    Car.SetCanBeVisiblyDamaged(1@, False)
+    Car.SetPetrolTankWeakpoint(1@, False)
+    Car.SetHealth(1@, 10000)
+    Car.SetTraction(1@, 2.0)
+end
+
 :main
 wait 0
 
@@ -17,17 +42,14 @@ then
 end
 
 // Check if the player is in a car; return to main loop if not
-if Char.IsInAnyCar($PLAYER_ACTOR)
+if Char.IsInAnyCar($PLAYER_ACTOR)    
 then
     1@ = Char.StoreCarIsIn($PLAYER_ACTOR)
-    Car.Fix(1@)
-    Car.SetHeavy(1@, True)
-    Car.SetCanBeVisiblyDamaged(1@, False)
-    Car.SetPetrolTankWeakpoint(1@, False)
-    Car.SetHealth(1@, 10000)
-    Car.SetTraction(1@, 2.0)
+    get_car_data()
+    set_car_to_heavy()
     Text.PrintHelp("Heavy Car Activated", 1000)
 else
+    restore_car_stats()
     goto @main
 end
 
