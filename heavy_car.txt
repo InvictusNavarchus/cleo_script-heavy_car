@@ -10,29 +10,32 @@ script_name 'HEAVYCAR'
 :main
 wait 0
 
-if Player.IsPlaying($PLAYER_ACTOR)
+// Check if the player is active; return to main loop if not
+if not Player.IsPlaying($PLAYER_ACTOR)
 then
-    1@ = Char.StoreCarIsInNoSave($PLAYER_ACTOR)
-    if Char.IsInAnyCar($PLAYER_ACTOR)
-    then
-        :check_controls
-        wait 0
-        if Pad.IsKeyPressed(KeyCode.H)
-        then
-            Car.Fix(1@)
-            Car.SetHeavy(1@, True)
-            Car.GiveNonPlayerNitro(1@)
-            Car.SetCanBeVisiblyDamaged(1@, False)
-            Car.SetPetrolTankWeakpoint(1@, False)
-            Car.SetHealth(1@, 10000)
-            Car.SetTraction(1@, 2.0)
-            Text.PrintHelp('CS_WELC')
-            wait 3000
-        end
-        goto @main
-    else
-        goto @main
-    end
-else
     goto @main
 end
+
+1@ = Char.StoreCarIsInNoSave($PLAYER_ACTOR)
+
+// Check if the player is in a car; return to main loop if not
+if not Char.IsInAnyCar($PLAYER_ACTOR)
+then
+    goto @main
+end
+
+// Wait for H key press to apply modifications
+if Pad.IsKeyPressed(KeyCode.H)
+then
+    Car.Fix(1@)
+    Car.SetHeavy(1@, True)
+    Car.GiveNonPlayerNitro(1@)
+    Car.SetCanBeVisiblyDamaged(1@, False)
+    Car.SetPetrolTankWeakpoint(1@, False)
+    Car.SetHealth(1@, 10000)
+    Car.SetTraction(1@, 2.0)
+    Text.PrintHelp('CS_WELC')
+    wait 3000
+end
+
+goto @main
