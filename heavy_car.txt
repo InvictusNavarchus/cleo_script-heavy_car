@@ -16,11 +16,10 @@ then
     goto @main
 end
 
-1@ = Char.StoreCarIsInNoSave($PLAYER_ACTOR)
-
 // Check if the player is in a car; return to main loop if not
 if Char.IsInAnyCar($PLAYER_ACTOR)
 then
+    1@ = Char.StoreCarIsIn($PLAYER_ACTOR)
     Car.Fix(1@)
     Car.SetHeavy(1@, True)
     Car.GiveNonPlayerNitro(1@)
