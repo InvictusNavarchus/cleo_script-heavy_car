@@ -42,9 +42,9 @@ then
 end
 
 // Check if the player is in a car; return to main loop if not
-if Char.IsInAnyCar($PLAYER_ACTOR)    
+if Char.IsSittingInAnyCar($PLAYER_ACTOR)    
 then
-    Car car_handle = Char.StoreCarIsIn($PLAYER_ACTOR)
+    Car car_handle = Char.GetCarIsUsing($PLAYER_ACTOR)
     int health
     float traction
     health, traction = get_car_data(car_handle)
