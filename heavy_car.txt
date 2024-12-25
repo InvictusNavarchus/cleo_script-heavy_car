@@ -1,5 +1,5 @@
 {$CLEO .cs}
-
+{$USE CLEO+}
 Alloc($PLAYER_ACTOR, 3)
 
 script_name 'HEAVYCAR'
@@ -50,10 +50,13 @@ then
     health, traction = get_car_data(car_handle)
     set_car_to_heavy(car_handle)
     Text.PrintHelp("Heavy Car Activated")
-else
+end
+
+// Check if player is exiting a car;
+if Char.IsExitingAnyCar($PLAYER_ACTOR)
+then
     restore_car_stats(car_handle, health, traction)
     Text.PrintHelp("Heavy Car Deactivated")
-    goto @main
 end
 
 goto @main
