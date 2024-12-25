@@ -17,6 +17,10 @@ function get_car_data(car_handle: Car): int, int
 end
 
 function restore_car_stats(car_handle: Car, health: int, traction: int)
+    if not Car.DoesExist(car_handle)
+    then
+        goto @main
+    end
     Car.SetHeavy(car_handle, False)
     Car.SetCanBeVisiblyDamaged(car_handle, True)
     Car.SetPetrolTankWeakpoint(car_handle, True)
@@ -25,6 +29,10 @@ function restore_car_stats(car_handle: Car, health: int, traction: int)
 end
 
 function set_car_to_heavy(car_handle: Car)
+    if not Car.DoesExist(car_handle)
+    then
+        goto @main
+    end
     Car.Fix(car_handle)
     Car.SetHeavy(car_handle, True)
     Car.SetCanBeVisiblyDamaged(car_handle, False)
