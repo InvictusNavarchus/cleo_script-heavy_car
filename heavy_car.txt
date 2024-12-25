@@ -8,27 +8,27 @@ script_name 'HEAVYCAR'
 // Modified by Invictus
 // Original Script: https://www.gtainside.com/en/sanandreas/mods/43308-heavy-car-v3/
 
-function get_car_data(): int, int
-    int health = Car.GetHealth(1@)
+function get_car_data(car_handle: Car): int, int
+    int health = Car.GetHealth(car_handle)
     float traction = 1.0
     return health traction
 end
 
-function restore_car_stats(health: int, traction: int)
-    Car.SetHeavy(1@, False)
-    Car.SetCanBeVisiblyDamaged(1@, True)
-    Car.SetPetrolTankWeakpoint(1@, True)
-    Car.SetHealth(1@, health)
-    Car.SetTraction(1@, traction)
+function restore_car_stats(car_handle: Car, health: int, traction: int)
+    Car.SetHeavy(car_handle, False)
+    Car.SetCanBeVisiblyDamaged(car_handle, True)
+    Car.SetPetrolTankWeakpoint(car_handle, True)
+    Car.SetHealth(car_handle, health)
+    Car.SetTraction(car_handle, traction)
 end
 
-function set_car_to_heavy()
-    Car.Fix(1@)
-    Car.SetHeavy(1@, True)
-    Car.SetCanBeVisiblyDamaged(1@, False)
-    Car.SetPetrolTankWeakpoint(1@, False)
-    Car.SetHealth(1@, 10000)
-    Car.SetTraction(1@, 2.0)
+function set_car_to_heavy(car_handle: Car)
+    Car.Fix(car_handle)
+    Car.SetHeavy(car_handle, True)
+    Car.SetCanBeVisiblyDamaged(car_handle, False)
+    Car.SetPetrolTankWeakpoint(car_handle, False)
+    Car.SetHealth(car_handle, 10000)
+    Car.SetTraction(car_handle, 2.0)
 end
 
 :main
@@ -43,14 +43,14 @@ end
 // Check if the player is in a car; return to main loop if not
 if Char.IsInAnyCar($PLAYER_ACTOR)    
 then
-    1@ = Char.StoreCarIsIn($PLAYER_ACTOR)
+    Car car_handle = Char.StoreCarIsIn($PLAYER_ACTOR)
     int health
     float traction
-    health, traction = get_car_data()
-    set_car_to_heavy()
+    health, traction = get_car_data(car_handle)
+    set_car_to_heavy(car_handle)
     Text.PrintHelp("Heavy Car Activated")
 else
-    restore_car_stats(health, traction)
+    restore_car_stats(car_handle, health, traction)
     Text.PrintHelp("Heavy Car Deactivated")
     goto @main
 end
