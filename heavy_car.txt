@@ -8,15 +8,13 @@ script_name 'HEAVYCAR'
 // Modified by Invictus
 // Original Script: https://www.gtainside.com/en/sanandreas/mods/43308-heavy-car-v3/
 
-// states
-int health, traction
-
-function get_car_data()
-    health = Car.GetHealth(1@)
-    traction = 1.0
+function get_car_data(): int, int
+    int health = Car.GetHealth(1@)
+    int traction = 1.0
+    return health traction
 end
 
-function restore_car_stats()
+function restore_car_stats(health: int, traction: int)
     Car.SetHeavy(1@, False)
     Car.SetCanBeVisiblyDamaged(1@, True)
     Car.SetPetrolTankWeakpoint(1@, True)
@@ -46,11 +44,12 @@ end
 if Char.IsInAnyCar($PLAYER_ACTOR)    
 then
     1@ = Char.StoreCarIsIn($PLAYER_ACTOR)
-    get_car_data()
+    int health, traction
+    health, traction = get_car_data()
     set_car_to_heavy()
     Text.PrintHelp("Heavy Car Activated", 1000)
 else
-    restore_car_stats()
+    restore_car_stats(health, traction)
     goto @main
 end
 
