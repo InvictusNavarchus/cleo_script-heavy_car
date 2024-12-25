@@ -5,7 +5,8 @@ Alloc($PLAYER_ACTOR, 3)
 script_name 'HEAVYCAR'
 // == Credit ==
 // Originally created by The AnonMod ANG
-// Link: https://www.gtainside.com/en/sanandreas/mods/43308-heavy-car-v3/
+// Modified by Invictus
+// Original Script: https://www.gtainside.com/en/sanandreas/mods/43308-heavy-car-v3/
 
 // states
 int health, traction
