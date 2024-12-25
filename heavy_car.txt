@@ -1,4 +1,5 @@
 {$CLEO .cs}
+
 Alloc($PLAYER_ACTOR, 3)
 
 script_name 'HEAVYCAR'
@@ -6,33 +7,32 @@ script_name 'HEAVYCAR'
 // Originally created by The AnonMod ANG
 // Link: https://www.gtainside.com/en/sanandreas/mods/43308-heavy-car-v3/
 
-:HEAVYCAR_19
+:main
 wait 0
-if 
-  Player.IsPlaying($PLAYER_ACTOR)
-1@ = Char.StoreCarIsInNoSave($PLAYER_ACTOR)
-goto_if_false @HEAVYCAR_19
-if 
-  Char.IsInAnyCar($PLAYER_ACTOR)
-goto_if_false @HEAVYCAR_19
-wait 0
-goto @HEAVYCAR_74
 
-:HEAVYCAR_74
-wait 0
-if 
-  Pad.IsKeyPressed(KeyCode.H)
-goto_if_false @HEAVYCAR_158
-Car.Fix(1@)
-Car.SetHeavy(1@, True)
-Car.GiveNonPlayerNitro(1@)
-Car.SetCanBeVisiblyDamaged(1@, False)
-Car.SetPetrolTankWeakpoint(1@, False)
-Car.SetHealth(1@, 10000)
-Car.SetTraction(1@, 2.0)
-Text.PrintHelp('CS_WELC')
-wait 3000
-
-:HEAVYCAR_158
-wait 0
-goto @HEAVYCAR_19
+if Player.IsPlaying($PLAYER_ACTOR)
+then
+    1@ = Char.StoreCarIsInNoSave($PLAYER_ACTOR)
+    if Char.IsInAnyCar($PLAYER_ACTOR)
+    then
+        :check_controls
+        wait 0
+        if Pad.IsKeyPressed(KeyCode.H)
+        then
+            Car.Fix(1@)
+            Car.SetHeavy(1@, True)
+            Car.GiveNonPlayerNitro(1@)
+            Car.SetCanBeVisiblyDamaged(1@, False)
+            Car.SetPetrolTankWeakpoint(1@, False)
+            Car.SetHealth(1@, 10000)
+            Car.SetTraction(1@, 2.0)
+            Text.PrintHelp('CS_WELC')
+            wait 3000
+        end
+        goto @main
+    else
+        goto @main
+    end
+else
+    goto @main
+end
