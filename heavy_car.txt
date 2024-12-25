@@ -9,7 +9,8 @@ script_name 'HEAVYCAR'
 // Original Script: https://www.gtainside.com/en/sanandreas/mods/43308-heavy-car-v3/
 
 function get_car_data(car_handle: Car): int, int
-    int health = Car.GetHealth(car_handle)
+    // int health = Car.GetHealth(car_handle) // Car.GetHealth() crashes the game for some reason
+    int health = 100
     float traction = 1.0
     return health traction
 end
