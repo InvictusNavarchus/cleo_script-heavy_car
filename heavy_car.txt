@@ -66,7 +66,7 @@ end
 
 // Wait until exits a car
 while not Char.IsExitingAnyCar($PLAYER_ACTOR)
-    wait 500
+    wait 10
     // Manually Activate Script
     // Useful when the heavy state suddenly lifted after entering a cutscene
     if Pad.IsKeyPressed(KeyCode.H)
