@@ -50,7 +50,15 @@ then
     goto @main
 end
 
+// Manually Activate Script
+// Useful when the heavy state suddenly lifted after entering a cutscene
+if Pad.IsKeyPressed(KeyCode.H)
+then
+    goto @activate_script
+end
+
 // Check if the player is in a car; return to main loop if not
+:activate_script
 if Char.IsSittingInAnyCar($PLAYER_ACTOR)    
 then
     Car car_handle = Char.GetCarIsUsing($PLAYER_ACTOR)
